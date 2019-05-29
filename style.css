@@ -1,0 +1,39 @@
+body {
+    box-sizing: border-box;
+    text-align: center;
+    padding: 50px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.controls {
+    height: auto;
+    padding: 10px;
+    background-color: lightgreen;
+}
+
+.controls a {
+    font-size: 1.5em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0 20px;
+    border: none;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+.controls a:hover {
+    background-color: green;
+    color: red;
+}
+
+.stopwatch {
+    font-size: 8em;
+    color: red;
+    padding-top: 10px;
+}
+
+.results {
+    color: blue;
+    font-size: 2em;
+}

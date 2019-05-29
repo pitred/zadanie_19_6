@@ -20,8 +20,10 @@ var Stopwatch = function () {
          this.times = {
             minutes: 0,
             seconds: 0,
-            miliseconds: 0
+            milliseconds: 0
          };
+         this.print();
+         this.running = false;
       }
    }, {
       key: 'print',
@@ -31,7 +33,7 @@ var Stopwatch = function () {
    }, {
       key: 'format',
       value: function format(times) {
-         return pad0(times.minutes) + ':' + pad0(times.seconds) + ':' + pad0(Math.floor(times.miliseconds));
+         return pad0(times.minutes) + ':' + pad0(times.seconds) + ':' + pad0(Math.floor(times.milliseconds));
       }
    }, {
       key: 'start',
@@ -55,10 +57,10 @@ var Stopwatch = function () {
    }, {
       key: 'calculate',
       value: function calculate() {
-         this.times.miliseconds += 1;
-         if (this.times.miliseconds >= 100) {
+         this.times.milliseconds += 1;
+         if (this.times.milliseconds >= 100) {
             this.times.seconds += 1;
-            this.times.miliseconds = 0;
+            this.times.milliseconds = 0;
          }
          if (this.times.seconds >= 60) {
             this.times.minutes += 1;
@@ -70,6 +72,19 @@ var Stopwatch = function () {
       value: function stop() {
          this.running = false;
          clearInterval(this.watch);
+      }
+   }, {
+      key: 'save',
+      value: function save() {
+         var results = document.querySelector('.results');
+         var itemLi = document.createElement('li');
+         itemLi.innerText = this.format(this.times);
+         results.appendChild(itemLi);
+      }
+   }, {
+      key: 'erase',
+      value: function erase() {
+         document.querySelector('.results').innerText = '';
       }
    }]);
 
@@ -86,6 +101,21 @@ startButton.addEventListener('click', function () {
 var stopButton = document.getElementById('stop');
 stopButton.addEventListener('click', function () {
    return stopwatch.stop();
+});
+
+var resetButton = document.getElementById('reset');
+resetButton.addEventListener('click', function () {
+   return stopwatch.reset();
+});
+
+var saveButton = document.getElementById('save');
+saveButton.addEventListener('click', function () {
+   return stopwatch.save();
+});
+
+var eraseButton = document.getElementById('erase');
+eraseButton.addEventListener('click', function () {
+   return stopwatch.erase();
 });
 
 function pad0(value) {
