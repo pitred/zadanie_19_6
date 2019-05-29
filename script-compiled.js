@@ -22,8 +22,7 @@ var Stopwatch = function () {
             seconds: 0,
             milliseconds: 0
          };
-         this.print();
-         this.running = false;
+         this.print(this.times);
       }
    }, {
       key: 'print',
