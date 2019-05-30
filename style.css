@@ -2,7 +2,8 @@ body {
     box-sizing: border-box;
     text-align: center;
     padding: 50px;
-    width: auto;
+    min-width: 500px;
+    width: 500px;
     margin: 0 auto;
 }
 
