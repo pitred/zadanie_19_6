@@ -10,7 +10,6 @@ class Stopwatch extends React.Component {
          }
       };
    }
-
    reset() {
       this.setState({
          times: {
@@ -21,18 +20,20 @@ class Stopwatch extends React.Component {
       });
       this.state.running = false;
    }
-   
+
    format(times) {
       return `${pad0(times.minutes)}:${pad0(times.seconds)}:${pad0(Math.floor(times.milliseconds))}`;
    }
+
    start() {
       if (!this.state.running) {
          this.setState({
-            running = true,
-         watch = setInterval(() => this.step(), 10)
-      })
-   }}
-   
+            running: true,
+            watch: setInterval(() => this.step(), 10)
+         });
+      }
+   }
+
    step() {
       if (!this.state.running) return;
       this.calculate();
@@ -49,17 +50,18 @@ class Stopwatch extends React.Component {
          this.state.times.seconds = 0;
       }
       this.setState({
-         times:this.state.times
-      })
+         times: this.state.times
+      });
    }
 
    stop() {
-      this.setState({
-         running = false
-      })
       clearInterval(this.state.watch);
+      this.setState({
+         running: false
+      });
    }
-   save(times) {//times//
+
+   save(times) {
       let results = document.querySelector('.results');
       let itemLi = document.createElement('li');
       itemLi.innerText = this.format(this.state.times);
@@ -69,23 +71,32 @@ class Stopwatch extends React.Component {
       document.querySelector('.results').innerText = '';
    }
 
+   render() {
+      return (
+         <div className={'app'}>
+            <nav className={'controls'}>
+               <a href={'#'} className={'button'} id={'start'} onClick={() => this.start()}>
+                  start
+               </a>
+               <a href={'#'} className={'button'} id={'stop'} onClick={() => this.stop()}>
+                  stop
+               </a>
+               <a href={'#'} className={'button'} id={'reset'} onClick={() => this.reset()}>
+                  reset
+               </a>
+               <a href={'#'} className={'button'} id={'save'} onClick={() => this.save()}>
+                  save
+               </a>
+               <a href={'#'} className={'button'} id={'erase'} onClick={() => this.erase()}>
+                  erase
+               </a>
 
-render(){
-   return(
-      <div className={'app'}>
-         <nav className={'controls'}>
-            <a href={"#"} className={"button"} id={"start"} onClick={()=>this.start()}>start</a>
-            <a href={"#"} className={"button"} id={"stop"} onClick={()=>this.stop()}>stop</a>
-            <a href={"#"} className={"button"} id={"reset"} onClick={()=>this.reset()}>reset</a>
-            <a href={"#"} className={"button"} id={"save"} onClick={()=>this.save()}>save</a>
-            <a href={"#"} className={"button"} id={"erase"} onClick={()=>this.erase()}>erase</a>
-
-            <div className={"stopwatch"}></div>
-            <ul className={"results"}></ul>
-         </nav>
-      </div>
-   )
-}
+               <div className={'stopwatch'}>{this.format(this.state.times)}</div>
+               <ul className={'results'} />
+            </nav>
+         </div>
+      );
+   }
 }
 
 function pad0(value) {
@@ -97,4 +108,4 @@ function pad0(value) {
 }
 
 var element = React.createElement(Stopwatch);
-ReactDOM.render(element, document.getElementById('app'))
+ReactDOM.render(element, document.getElementById('app'));
