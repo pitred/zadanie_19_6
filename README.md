@@ -1,4 +1,4 @@
-zadanie 19.6 Stoper
+zadanie 19.6 Stoper (React)
 
 Publish
 
